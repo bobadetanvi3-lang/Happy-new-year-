@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Special</title>
+    <style>
+        :root {
+            --bg-color: #0b0111;
+            --card-bg: #fff5e6;
+            --accent-purple: #a855f7;
+            --text-main: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Container for sections */
+        .section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 { font-size: 2rem; margin-bottom: 10px; }
+        p { color: #ccc; margin-bottom: 20px; }
+
+        /* Card Animation Styles */
+        .card-stack {
+            position: relative;
+            width: 280px;
+            height: 380px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 8px solid var(--accent-purple);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 { font-size: 1.5rem; color: #d35400; margin: 0; }
+        .card p { color: #555; font-weight: bold; }
+
+        /* Golden Ticket Style */
+        .ticket {
+            background: #1a1a2e;
+            border: 2px dashed #ffd700;
+            padding: 40px;
+            border-radius: 20px;
+            color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Letter Box */
+        .letter-container {
+            max-width: 500px;
+            background: #fff;
+            color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            line-height: 1.6;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-top: 20px;
+        }
+
+        .from-tag {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: right;
+            color: var(--accent-purple);
+        }
+
+        .hidden { display: none; }
+        
+        button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="section" id="step1">
+        <h1>For my Special One :)</h1>
+        <p>Tap the card to read</p>
+        
+        <div class="card-stack" onclick="nextStep(1)">
+            <div class="card">
+                <img src="https://via.placeholder.com/250x200?text=Happy+2026" alt="New Year">
+                <h2>HAPPY NEW YEAR</h2>
+                <h1 style="color:#e67e22; font-size: 3rem;">2026</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hidden" id="step2">
+        <h1>Some moments from last days</h1>
+        <p>Tap the photo to continue</p>
+        
+        <div class="card-stack" id="momentStack">
+            <div class="card" onclick="popCard(this)">
+                <img src="photo3.jpg" alt="Moment 3">
+                <p>29/12/25</p>
+            </div>
+            <div class="card" onclick="popCard(this)">
+                <img src="photo2.jpg" alt="Moment 2">
+                <p>Our Eye Contact</p>
+            </div>
+            <div class="card" onclick="popCard(this)">
+                <img src="photo1.jpg" alt="Moment 1">
+                <p>Our Last Hug</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hidden" id="step3">
+        <h1>For my Special Person</h1>
+        
+        <div class="letter-container">
+            <p>
+                You are healing parts of me that you never even broke. I hope we stay friends just like this, 
+                and I truly wish our friendship becomes even stronger in 2026. Let's grow together!
+            </p>
+            <p>
+                I hope you clear your <b>exam on 19/01/2026</b> with great results. 
+                May 2026 bring you everything you desire, filled with success and happiness. 
+                I hope we always stay together like this.
+            </p>
+            <div class="from-tag">From: Tanvi</div>
+        </div>
+
+        <button onclick="nextStep(3)">Claim Surprise</button>
+    </section>
+
+    <section class="section hidden" id="step4">
+        <div class="ticket">
+            <h2 style="letter-spacing: 5px;">GOLDEN TICKET</h2>
+            <p>VALID FOR EVERY DAY AHEAD</p>
+            <h3 style="font-style: italic;">"Unlimited Love & Smiles"</h3>
+            <p>No expiration date</p>
+        </div>
+        <p style="margin-top: 30px;">Happy New Year 2026!</p>
+    </section>
+
+    <script>
+        let currentStep = 1;
+        let cardsLeft = 3;
+
+        function nextStep(step) {
+            document.getElementById(step${step}).classList.add('hidden');
+            document.getElementById(step${step + 1}).classList.remove('hidden');
+        }
+
+        function popCard(cardElement) {
+            // Animation for swiping card away
+            cardElement.style.transform = "translateX(400px) rotate(20deg)";
+            cardElement.style.opacity = "0";
+            
+            setTimeout(() => {
+                cardElement.style.display = "none";
+                cardsLeft--;
+                if (cardsLeft === 0) {
+                    nextStep(2);
+                }
+            }, 500);
+        }
+    </script>
+</body>
+</html>
